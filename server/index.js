@@ -6,7 +6,7 @@ const connectDB = require("./db/connect");
 const authRoutes = require("./routes/authRoutes");
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3001;
 
 // middleware
 app.use(express.json());
