@@ -29,11 +29,7 @@ const AppProvider = ({ children }) => {
     localStorage.setItem("user", JSON.stringify(user));
     localStorage.setItem("token", token);
   };
-  // rimuovo a localstorage
-  const removeUserToLS = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-  };
+  
 
   const registerUser = async (currUser) => {
     dispatch({ type: REGISTER_USER_BEGIN });
@@ -73,10 +69,12 @@ const AppProvider = ({ children }) => {
         },
       });
       addUserToLS({ user, token });
+
     } catch (error) {
       dispatch({
         type: LOGIN_USER_ERROR,
         payload: { msg: error.response.data.msg },
+        
       });
     }
   };

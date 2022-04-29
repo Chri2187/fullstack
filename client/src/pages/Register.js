@@ -1,15 +1,15 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import FormInput from "../components/FormInput";
-import { useAppContext } from "../context/appContext";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import FormInput from '../components/FormInput';
+import { useAppContext } from '../context/appContext';
 
 const initialState = {
-  name: "",
-  lastname: "",
-  email: "",
-  birthDay: "",
+  name: '',
+  lastname: '',
+  email: '',
+  password: '',
+  birthDay: '',
   isRegistered: true,
 };
 const Register = () => {
@@ -28,14 +28,15 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { name, lastname, email, birthDay, isRegistered } = values;
+    const { name, lastname, email, password, birthDay, isRegistered } = values;
 
-    if (!lastname || !email || (!name && !isRegistered)) {
-      Swal.fire("Tutti i campi sono obbligatori", "", "warning");
+    // if (!lastname || !email || !password || (!name && !isRegistered)) {
+    if (!email || !password) {
+      Swal.fire('I campi Email e Password sono obbligatori', '', 'warning');
       return;
     }
 
-    const currUser = { name, lastname, email, birthDay };
+    const currUser = { name, lastname, email, password, birthDay };
 
     if (isRegistered) {
       loginUser(currUser);
@@ -47,7 +48,7 @@ const Register = () => {
   useEffect(() => {
     if (token) {
       setTimeout(() => {
-        navigate("/home");
+        navigate('/home');
       }, 2000);
     }
   }, [token, navigate]);
@@ -55,58 +56,67 @@ const Register = () => {
   return (
     <>
       <div
-        id="formContainer"
-        className="container shadow-lg p-3 mb-5 bg-body rounded"
+        id='formContainer'
+        className='container shadow-lg p-3 mb-5 bg-body rounded'
       >
-        <h1 className="text-center">
-          {values.isRegistered ? "Login" : "Registrati"}
+        <h1 className='text-center'>
+          {values.isRegistered ? 'Login' : 'Registrati'}
         </h1>
         <form onSubmit={handleSubmit}>
-          <div className="mb-3">
+          <div className='mb-3'>
             <FormInput
-              type="text"
+              type='text'
               value={values.name}
-              name="name"
-              labelText="Nome"
+              name='name'
+              labelText='Nome'
               handleChange={handleChange}
             />
             <FormInput
-              type="text"
+              type='text'
               value={values.lastname}
-              name="lastname"
-              labelText="Cognome"
+              name='lastname'
+              labelText='Cognome'
               handleChange={handleChange}
             />
             <FormInput
-              type="email"
+              type='email'
               value={values.email}
-              name="email"
-              labelText="Email"
+              name='email'
+              labelText='Email'
               handleChange={handleChange}
+              reqiured
             />
             <FormInput
-              type="date"
+              type='password'
+              value={values.password}
+              name='password'
+              labelText='Password'
+              handleChange={handleChange}
+              reqiured
+            />
+            <FormInput
+              type='date'
               value={values.birthDay}
-              name="birthDay"
-              labelText="Data di Nascita"
+              name='birthDay'
+              labelText='Data di Nascita'
               handleChange={handleChange}
             />
           </div>
-          <div className="d-grid gap-2">
-            <button type="submit" className="btn btn-outline-success mb-3">
-              {!values.isRegistered ? "Registrati" : "Login"}
+          <div className='d-grid gap-2'>
+            <button type='submit' className='btn btn-outline-success mb-3'>
+              {!values.isRegistered ? 'Registrati' : 'Login'}
             </button>
-            <p className="m-0 ">
+            <p className='m-0 '>
               {!values.isRegistered
-                ? "Sei già registrato?"
-                : "Non sei ancora registrato?"}
+                ? 'Sei già registrato?'
+                : 'Non sei ancora registrato?'}
             </p>
             <button
-              type="button"
-              className="btn btn-primary"
+              type='button'
+              className='btn btn-primary'
               onClick={toggleRegistered}
             >
-              {!values.isRegistered ? "Login" : "Registrati"}
+              {!values.isRegistered ? 'Login' : 'Registrati'}
             </button>
           </div>
         </form>

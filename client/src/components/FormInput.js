@@ -12,7 +12,6 @@ const FormInput = ({ name, type, value, handleChange, labelText }) => {
         value={value}
         name={name}
         onChange={handleChange}
-        required
       />
     </div>
   );
