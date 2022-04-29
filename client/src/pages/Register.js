@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -85,6 +84,7 @@ const Register = () => {
               name='email'
               labelText='Email'
               handleChange={handleChange}
+              reqiured
             />
             <FormInput
               type='password'
@@ -92,6 +92,7 @@ const Register = () => {
               name='password'
               labelText='Password'
               handleChange={handleChange}
+              reqiured
             />
             <FormInput
               type='date'

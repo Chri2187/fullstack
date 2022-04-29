@@ -1,5 +1,4 @@
 const User = require('../models/User');
-
 const register = async (req, res) => {
   try {
     const { name, lastname, email, password, birthDay } = req.body;
@@ -28,27 +27,30 @@ const register = async (req, res) => {
     if (err) {
       console.log(err);
     }
-    res.status(500).json({ msg: err.message });
+    return res.status(500).json({ msg: err.message });
   }
 };
 
 const login = async (req, res) => {
   // Recupero i dati del form
-  const { name, lastname, email, password, birthDay } = req.body;
+  const { email, password } = req.body;
+
   // check solo su email & pwd
   if (!email || !password) {
     res.status(500).json({ msg: 'I campi Email e Password sono obbligatori' });
   }
   try {
     // Controllo ne DB se l'utente esiste
-    const filtro = {
-      email: email,
-      password: password,
-    };
     const user = await User.findOne({ email }).select('+password');
-    // const user = await User.findOne(filtro);
     if (!user) {
       res.status(401).json({ msg: 'Credenziali errate' });
+    }
+
+    // Controllo hash pwd
+    const hashPwd = await user.comparePassword(password);
+    if (!hashPwd) {
+      res.status(500).json({ msg: 'Credenziali errate' });
+      return;
     }
     // Creo il token
     const token = user.createJWT();
@@ -59,9 +61,9 @@ const login = async (req, res) => {
     });
   } catch (err) {
     if (err) {
-      console.log(err);
+      console.log(err.message);
     }
-    res.status(401).json({ msg: 'erorre' });
+    res.status(401).json({ msg: err.message });
   }
 };
 

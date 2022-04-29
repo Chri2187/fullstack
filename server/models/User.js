@@ -41,9 +41,10 @@ const UserSchema = new mongoose.Schema({
 });
 
 // prima di salvare faccio hash
-UserSchema.pre('save', async function(){
-  const salt = await bcrypt.genSalt(10)
-  this.password = await bcrypt.compare(this.password,salt)
+UserSchema.pre('save', async function () {
+  const hashPwd = await bcrypt.hash(this.password, 10);
+  this.password = hashPwd;
+  this.password = bcrypt.compare(this.password, hashPwd);
 });
 
 // crea JWT per utente registrato
@@ -54,9 +55,9 @@ UserSchema.methods.createJWT = () => {
 };
 
 // Confronto la pwd
-UserSchema.methods.comparePassword = async function(candidate) {
-  const isMatch = await bcryptjs.compare(candidate,this.password)
-  return isMatch
-}
+UserSchema.methods.comparePassword = async function (candidate) {
+  const isMatch = await bcrypt.compare(candidate, this.password);
+  return isMatch;
+};
 
 module.exports = mongoose.model('User', UserSchema);
