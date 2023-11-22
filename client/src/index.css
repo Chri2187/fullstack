@@ -53,9 +53,11 @@ code {
 /* Register-login */
 #formContainer {
     border: 1px solid rgb(194, 194, 194);
+    border-radius: 15px;
     max-width: 550px;
     padding: 1.5rem;
-    margin-top: 10%;
+    margin-top: 5%;
+    box-shadow: 15px 10px 5px grey;
 }
 
 /* Meteo App */
@@ -119,4 +121,8 @@ code {
 
 .form-select {
     max-width: 5.5rem;
+}
+
+.form-login {
+    box-shadow: 10px 10px 5px grey;
 }

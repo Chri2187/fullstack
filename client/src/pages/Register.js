@@ -5,124 +5,129 @@ import FormInput from '../components/FormInput';
 import { useAppContext } from '../context/appContext';
 
 const initialState = {
-  name: '',
-  lastname: '',
-  email: '',
-  password: '',
-  birthDay: '',
-  isRegistered: true,
+    name: '',
+    lastname: '',
+    email: '',
+    password: '',
+    birthDay: '',
+    isRegistered: true,
 };
 const Register = () => {
-  const [values, setValues] = useState(initialState);
-  const navigate = useNavigate();
+    const [values, setValues] = useState(initialState);
+    const navigate = useNavigate();
 
-  const { registerUser, loginUser, token } = useAppContext();
+    const { registerUser, loginUser, token } = useAppContext();
 
-  const toggleRegistered = () => {
-    setValues({ ...values, isRegistered: !values.isRegistered });
-  };
+    const toggleRegistered = () => {
+        setValues({ ...values, isRegistered: !values.isRegistered });
+    };
 
-  const handleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
+    const handleChange = (e) => {
+        setValues({ ...values, [e.target.name]: e.target.value });
+    };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const { name, lastname, email, password, birthDay, isRegistered } = values;
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const { name, lastname, email, password, birthDay, isRegistered } =
+            values;
 
-    // if (!lastname || !email || !password || (!name && !isRegistered)) {
-    if (!email || !password) {
-      Swal.fire('I campi Email e Password sono obbligatori', '', 'warning');
-      return;
-    }
+        // if (!lastname || !email || !password || (!name && !isRegistered)) {
+        if (!email || !password) {
+            Swal.fire(
+                'I campi Email e Password sono obbligatori',
+                '',
+                'warning'
+            );
+            return;
+        }
 
-    const currUser = { name, lastname, email, password, birthDay };
+        const currUser = { name, lastname, email, password, birthDay };
 
-    if (isRegistered) {
-      loginUser(currUser);
-    } else {
-      registerUser(currUser);
-    }
-  };
+        if (isRegistered) {
+            loginUser(currUser);
+        } else {
+            registerUser(currUser);
+        }
+    };
 
-  useEffect(() => {
-    if (token) {
-      setTimeout(() => {
-        navigate('/home');
-      }, 2000);
-    }
-  }, [token, navigate]);
+    useEffect(() => {
+        if (token) {
+            setTimeout(() => {
+                navigate('/home');
+            }, 2000);
+        }
+    }, [token, navigate]);
 
-  return (
-    <>
-      <div
-        id='formContainer'
-        className='container shadow-lg p-3 mb-5 bg-body rounded'
-      >
-        <h1 className='text-center'>
-          {values.isRegistered ? 'Login' : 'Registrati'}
-        </h1>
-        <form onSubmit={handleSubmit}>
-          <div className='mb-3'>
-            <FormInput
-              type='text'
-              value={values.name}
-              name='name'
-              labelText='Nome'
-              handleChange={handleChange}
-            />
-            <FormInput
-              type='text'
-              value={values.lastname}
-              name='lastname'
-              labelText='Cognome'
-              handleChange={handleChange}
-            />
-            <FormInput
-              type='email'
-              value={values.email}
-              name='email'
-              labelText='Email'
-              handleChange={handleChange}
-              reqiured
-            />
-            <FormInput
-              type='password'
-              value={values.password}
-              name='password'
-              labelText='Password'
-              handleChange={handleChange}
-              reqiured
-            />
-            <FormInput
-              type='date'
-              value={values.birthDay}
-              name='birthDay'
-              labelText='Data di Nascita'
-              handleChange={handleChange}
-            />
-          </div>
-          <div className='d-grid gap-2'>
-            <button type='submit' className='btn btn-outline-success mb-3'>
-              {!values.isRegistered ? 'Registrati' : 'Login'}
-            </button>
-            <p className='m-0 '>
-              {!values.isRegistered
-                ? 'Sei già registrato?'
-                : 'Non sei ancora registrato?'}
-            </p>
-            <button
-              type='button'
-              className='btn btn-primary'
-              onClick={toggleRegistered}
-            >
-              {!values.isRegistered ? 'Login' : 'Registrati'}
-            </button>
-          </div>
-        </form>
-      </div>
-    </>
-  );
+    return (
+        <>
+            <div id='formContainer' className='container p-3 mb-5 bg-body '>
+                <h1 className='text-center'>
+                    {values.isRegistered ? 'Login' : 'Registrati'}
+                </h1>
+                <form onSubmit={handleSubmit}>
+                    <div className='mb-3'>
+                        <FormInput
+                            type='text'
+                            value={values.name}
+                            name='name'
+                            labelText='Nome'
+                            handleChange={handleChange}
+                        />
+                        <FormInput
+                            type='text'
+                            value={values.lastname}
+                            name='lastname'
+                            labelText='Cognome'
+                            handleChange={handleChange}
+                        />
+                        <FormInput
+                            type='email'
+                            value={values.email}
+                            name='email'
+                            labelText='Email'
+                            handleChange={handleChange}
+                            reqiured
+                        />
+                        <FormInput
+                            type='password'
+                            value={values.password}
+                            name='password'
+                            labelText='Password'
+                            handleChange={handleChange}
+                            reqiured
+                        />
+                        <FormInput
+                            type='date'
+                            value={values.birthDay}
+                            name='birthDay'
+                            labelText='Data di Nascita'
+                            handleChange={handleChange}
+                        />
+                    </div>
+                    <div className='d-grid gap-2'>
+                        <button
+                            type='submit'
+                            className='btn btn-outline-success mb-3'
+                        >
+                            {!values.isRegistered ? 'Registrati' : 'Login'}
+                        </button>
+                        <p className='m-0 '>
+                            {!values.isRegistered
+                                ? 'Sei già registrato?'
+                                : 'Non sei ancora registrato?'}
+                        </p>
+                        <button
+                            type='button'
+                            className='btn btn-primary'
+                            onClick={toggleRegistered}
+                        >
+                            {!values.isRegistered ? 'Login' : 'Registrati'}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </>
+    );
 };
 
 export default Register;
