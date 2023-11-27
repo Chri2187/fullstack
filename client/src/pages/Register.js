@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import FormInput from '../components/FormInput';
 import { useAppContext } from '../context/appContext';
@@ -9,8 +9,7 @@ const initialState = {
     lastname: '',
     email: '',
     password: '',
-    birthDay: '',
-    isRegistered: true,
+    isRegistered: false,
 };
 const Register = () => {
     const [values, setValues] = useState(initialState);
@@ -28,8 +27,7 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const { name, lastname, email, password, birthDay, isRegistered } =
-            values;
+        const { name, lastname, email, password, isRegistered } = values;
 
         // if (!lastname || !email || !password || (!name && !isRegistered)) {
         if (!email || !password) {
@@ -41,7 +39,7 @@ const Register = () => {
             return;
         }
 
-        const currUser = { name, lastname, email, password, birthDay };
+        const currUser = { name, lastname, email, password };
 
         if (isRegistered) {
             loginUser(currUser);
@@ -96,33 +94,22 @@ const Register = () => {
                             handleChange={handleChange}
                             reqiured
                         />
-                        <FormInput
-                            type='date'
-                            value={values.birthDay}
-                            name='birthDay'
-                            labelText='Data di Nascita'
-                            handleChange={handleChange}
-                        />
                     </div>
                     <div className='d-grid gap-2'>
                         <button
                             type='submit'
                             className='btn btn-outline-success mb-3'
                         >
-                            {!values.isRegistered ? 'Registrati' : 'Login'}
+                            Registrati
                         </button>
-                        <p className='m-0 '>
-                            {!values.isRegistered
-                                ? 'Sei già registrato?'
-                                : 'Non sei ancora registrato?'}
-                        </p>
-                        <button
-                            type='button'
-                            className='btn btn-primary'
-                            onClick={toggleRegistered}
-                        >
-                            {!values.isRegistered ? 'Login' : 'Registrati'}
-                        </button>
+                        <div className='d-flex'>
+                            <p>
+                                Hai già un account?
+                                <Link to='/' className='mx-2'>
+                                    Entra!
+                                </Link>
+                            </p>
+                        </div>
                     </div>
                 </form>
             </div>

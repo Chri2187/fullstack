@@ -101,7 +101,7 @@ code {
 }
 
 .card {
-    box-shadow: 10px 10px 5px grey;
+    box-shadow: 10px 10px 15px grey;
 }
 
 /* Dashboard */
@@ -124,5 +124,8 @@ code {
 }
 
 .form-login {
-    box-shadow: 10px 10px 5px grey;
+    box-shadow: 10px 10px 15px grey;
+}
+#formContainer {
+    box-shadow: 10px 10px 15px grey;
 }

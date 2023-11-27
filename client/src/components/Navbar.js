@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { BsCurrencyExchange, BsListTask } from 'react-icons/bs';
 import { TiWeatherPartlySunny } from 'react-icons/ti';
 const Navbar = () => {
-    let user = localStorage.getItem('user');
+    const user = localStorage.getItem('user');
     return (
         <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
             <div className='container-fluid'>
@@ -48,7 +48,7 @@ const Navbar = () => {
                                 Task List <BsListTask color='#f5b618' />
                             </Link>
                         </li>
-                        {!user && (
+                        {/* {!user && (
                             <li className='nav-item'>
                                 <Link className='nav-link' to='/'>
                                     <span className='badge rounded-pill bg-info text-dark'>
@@ -56,7 +56,22 @@ const Navbar = () => {
                                     </span>
                                 </Link>
                             </li>
-                        )}
+                        )} */}
+                        {
+                            user ? (<li className='nav-item'>
+                                <Link className='nav-link' to='/'>
+                                    <span className='badge rounded-pill bg-info text-dark'>
+                                        {user.toUpperCase()}
+                                    </span>
+                                </Link>
+                            </li>) : (<li className='nav-item'>
+                                <Link className='nav-link' to='/'>
+                                    <span className='badge rounded-pill bg-info text-dark'>
+                                        Login
+                                    </span>
+                                </Link>
+                            </li>)
+                        }
                     </ul>
                 </div>
             </div>

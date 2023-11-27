@@ -1,14 +1,13 @@
 const User = require('../models/User');
 const register = async (req, res) => {
     try {
-        const { name, lastname, email, password, birthDay } = req.body;
+        const { name, lastname, email, password } = req.body;
         // Registro il nuovo utente nel DB
         const newUser = await User.create({
             name,
             lastname,
             email,
             password,
-            birthDay,
         });
         // Creo il token
         const token = newUser.createJWT();
@@ -19,7 +18,6 @@ const register = async (req, res) => {
                 lastname: newUser.lastname,
                 email: newUser.email,
                 password: newUser.password,
-                birthDay: newUser.birthDay,
             },
             token,
         });
