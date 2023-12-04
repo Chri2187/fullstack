@@ -49,20 +49,19 @@ code {
         transform: rotate(360deg);
     }
 }
-
 /* Register-login */
 #formContainer {
     border: 1px solid rgb(194, 194, 194);
     border-radius: 15px;
-    max-width: 550px;
+    max-width: 350px;
     padding: 1.5rem;
     margin-top: 5%;
-    box-shadow: 15px 10px 5px grey;
+    box-shadow: 10px 10px 15px grey;
 }
 
 /* Meteo App */
 .weatherResults {
-    max-width: 600px;
+    max-width: 800px;
     box-sizing: border-box;
     margin: auto;
     padding: 0 1rem;
@@ -101,13 +100,13 @@ code {
 }
 
 .card {
-    box-shadow: 10px 10px 15px grey;
+    box-shadow: 10px 10px 15px rgb(198, 230, 247);
 }
 
 /* Dashboard */
 .card-img-top {
     width: 100%;
-    height: 15vw;
+    height: 20vh;
     object-fit: contain;
 }
 
@@ -124,8 +123,5 @@ code {
 }
 
 .form-login {
-    box-shadow: 10px 10px 15px grey;
-}
-#formContainer {
     box-shadow: 10px 10px 15px grey;
 }

@@ -58,7 +58,7 @@ const Register = () => {
 
     return (
         <>
-            <div id='formContainer' className='container p-3 mb-5 bg-body '>
+            <div id='formContainer' className='container p-3 mb-5 bg-body'>
                 <h1 className='text-center'>
                     {values.isRegistered ? 'Login' : 'Registrati'}
                 </h1>

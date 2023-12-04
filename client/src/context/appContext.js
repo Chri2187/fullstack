@@ -9,6 +9,7 @@ import {
     LOGIN_USER_ERROR,
 } from './actions';
 import reducer from './reducers';
+import Swal from 'sweetalert2';
 
 const token = localStorage.getItem('token');
 const user = localStorage.getItem('user');
@@ -26,10 +27,11 @@ const AppProvider = ({ children }) => {
 
     // aggiungo a localstorage
     const addUserToLS = ({ user, token }) => {
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('user', user.name);
         localStorage.setItem('token', token);
     };
 
+    // REGISTER
     const registerUser = async (currUser) => {
         dispatch({ type: REGISTER_USER_BEGIN });
         try {
@@ -38,7 +40,13 @@ const AppProvider = ({ children }) => {
                 currUser
             );
             const { user, token } = response.data;
-
+            Swal.fire({
+                icon: 'success',
+                title: 'Ok',
+                text: 'Registration successful!',
+                showConfirmButton: false,
+                timer: 1000,
+            });
             dispatch({
                 type: REGISTER_USER_SUCCESS,
                 payload: {
@@ -48,8 +56,11 @@ const AppProvider = ({ children }) => {
             });
             addUserToLS({ user, token });
         } catch (error) {
-            console.log(error.response);
-
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: `${error.response.data.msg}`,
+            });
             dispatch({
                 type: REGISTER_USER_ERROR,
                 payload: { msg: error.response.data.msg },
@@ -57,6 +68,7 @@ const AppProvider = ({ children }) => {
         }
     };
 
+    // LOGIN
     const loginUser = async (currUser) => {
         dispatch({ type: LOGIN_USER_BEGIN });
 
@@ -66,6 +78,13 @@ const AppProvider = ({ children }) => {
                 currUser
             );
             const { user, token } = data;
+            Swal.fire({
+                icon: 'success',
+                title: 'Ok',
+                text: 'Login successful!',
+                showConfirmButton: false,
+                timer: 1000,
+            });
             dispatch({
                 type: LOGIN_USER_SUCCESS,
                 payload: {
@@ -75,6 +94,11 @@ const AppProvider = ({ children }) => {
             });
             addUserToLS({ user, token });
         } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: `Something went wrong - ${error.response.data.msg}`,
+            });
             dispatch({
                 type: LOGIN_USER_ERROR,
                 payload: { msg: error.response.data.msg },

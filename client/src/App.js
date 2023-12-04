@@ -21,7 +21,6 @@ function App() {
                     <Route path='/converter' element={<Converter />} />
                     <Route path='/meteo' element={<Meteo />} />
                     <Route path='/tasks' element={<Tasks />} />
-                    <Route path='/register' element={<Register />} />
                 </Route>
                 <Route path='*' element={<ErrorPage />} />
             </Routes>

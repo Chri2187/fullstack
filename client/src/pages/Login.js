@@ -31,46 +31,16 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            // const response = await axios.post(urlBE + '/login', {
-            //     email,
-            //     password,
-            // });
-            // console.log(response.data);
-            // if (response.data.user.email === email) {
-            //     localStorage.setItem('token', response.data.token);
-            //     localStorage.setItem('user', response.data.user.name);
-            //     navigate('/home');
-            // } else {
-            //     Swal.fire({
-            //         icon: 'error',
-            //         title: 'Oops...',
-            //         text: 'Something went wrong - Check credentials',
-            //     });
-            // }
-            // if (!email || !password) {
-            //     Swal.fire(
-            //         'I campi Email e Password sono obbligatori',
-            //         '',
-            //         'warning'
-            //     );
-            //     return;
-            // }
             const { email, password } = values;
             const currUser = { email, password };
-            console.log(currUser);
+
             loginUser(currUser);
 
-            Swal.fire({
-                icon: 'success',
-                title: 'Ok',
-                text: 'Login successful!',
-                showConfirmButton: false,
-                timer: 1000,
-            });
             setTimeout(() => {
                 window.location.reload(false);
             }, 1000);
         } catch (err) {
+            console.log('dentro errore login');
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -80,7 +50,7 @@ const Login = () => {
     };
     return (
         <>
-            <div id='formContainer' className='container w-50  '>
+            <div id='formContainer' className='container  '>
                 <h1 className='text-center'>Accedi</h1>
                 <form onSubmit={handleSubmit}>
                     <FormInput
@@ -101,21 +71,22 @@ const Login = () => {
                     />
                     <div className='d-grid gap-2'>
                         <button
-                            className='btn btn-outline-primary'
+                            className='btn btn-outline-primary mb-3'
                             type='submit'
                         >
                             Login
                         </button>
+                        <div className='d-flex'>
+                            <p>
+                                Non hai un account?
+                                <Link to='/register' className='mx-2'>
+                                    Registrati qui!
+                                </Link>
+                            </p>
+                        </div>
                     </div>
+                    <div className='d-grid gap-2'></div>
                 </form>
-                <div className='d-flex'>
-                    <p>
-                        Non hai un account?
-                        <Link to='/register' className='mx-2'>
-                            Registrati qui!
-                        </Link>
-                    </p>
-                </div>
             </div>
         </>
     );

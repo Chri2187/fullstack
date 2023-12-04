@@ -2,8 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { BsCurrencyExchange, BsListTask } from 'react-icons/bs';
 import { TiWeatherPartlySunny } from 'react-icons/ti';
+import { AiOutlineLogin, AiOutlineLogout } from 'react-icons/ai';
+
 const Navbar = () => {
     const user = localStorage.getItem('user');
+    const handleLogout = () => {
+        window.location.reload(false);
+        localStorage.clear();
+    };
     return (
         <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
             <div className='container-fluid'>
@@ -48,30 +54,25 @@ const Navbar = () => {
                                 Task List <BsListTask color='#f5b618' />
                             </Link>
                         </li>
-                        {/* {!user && (
+                        {user ? (
                             <li className='nav-item'>
                                 <Link className='nav-link' to='/'>
-                                    <span className='badge rounded-pill bg-info text-dark'>
-                                        Login
+                                    <span
+                                        className='badge rounded-pill bg-info text-dark'
+                                        onClick={handleLogout}
+                                    >
+                                        <AiOutlineLogout
+                                            className='mr-5'
+                                            color='white'
+                                            size={15}
+                                            title='Logout'
+                                        />
                                     </span>
                                 </Link>
                             </li>
-                        )} */}
-                        {
-                            user ? (<li className='nav-item'>
-                                <Link className='nav-link' to='/'>
-                                    <span className='badge rounded-pill bg-info text-dark'>
-                                        {user.toUpperCase()}
-                                    </span>
-                                </Link>
-                            </li>) : (<li className='nav-item'>
-                                <Link className='nav-link' to='/'>
-                                    <span className='badge rounded-pill bg-info text-dark'>
-                                        Login
-                                    </span>
-                                </Link>
-                            </li>)
-                        }
+                        ) : (
+                            ''
+                        )}
                     </ul>
                 </div>
             </div>
