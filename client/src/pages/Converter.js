@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import ConvertRow from '../components/ConvertRow';
+import axios from 'axios';
 
 const Converter = () => {
-    const exchangeURL =
-        'http://api.exchangeratesapi.io/v1/latest?access_key=2bb07f6714645a05315aa42f3c83bde4';
-    //rmEFNRdDwRCT388vpCMGlYiWeXkvUdgp
+    const exchangeURL = 'https://api.apilayer.com/currency_data/list';
 
     const [currencyOptions, setCurrencyOptions] = useState([]);
     const [fromCurrency, setFromCurrency] = useState();
@@ -21,17 +20,30 @@ const Converter = () => {
         toAmount = amount;
         fromAmount = toAmount / exchangeRate;
     }
+    var myHeaders = new Headers();
+    myHeaders.append('apikey', 'rmEFNRdDwRCT388vpCMGlYiWeXkvUdgp');
 
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow',
+        headers: myHeaders,
+    };
     useEffect(() => {
-        fetch(exchangeURL)
-            .then((res) => res.json())
-            .then((data) => {
-                const firstCurrency = Object.keys(data.rates)[0];
-                setCurrencyOptions([data.base, ...Object.keys(data.rates)]);
-                setFromCurrency(data.base);
-                setToCurrency(firstCurrency);
-                setExchangeRate(data.rates[firstCurrency]);
-            });
+        fetch(exchangeURL, requestOptions)
+            .then((response) => response.text())
+            .then((result) => {
+                console.log(result);
+                console.log(...Object.keys(result));
+                const firstCurrency = Object.keys(result)[0];
+            })
+            // .then((data) => {
+            //     const firstCurrency = Object.keys(data.rates)[0];
+            //     setCurrencyOptions([data.base, ...Object.keys(data.rates)]);
+            //     setFromCurrency(data.base);
+            //     setToCurrency(firstCurrency);
+            //     setExchangeRate(data.rates[firstCurrency]);
+            // })
+            .catch((error) => console.log('error', error));
     }, []);
 
     useEffect(() => {

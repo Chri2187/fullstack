@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { BsCurrencyExchange, BsListTask } from 'react-icons/bs';
 import { TiWeatherPartlySunny } from 'react-icons/ti';
-import { AiOutlineLogin, AiOutlineLogout } from 'react-icons/ai';
+import { AiOutlineLogout } from 'react-icons/ai';
 
 const Navbar = () => {
     const user = localStorage.getItem('user');

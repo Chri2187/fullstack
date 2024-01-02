@@ -21,8 +21,8 @@ const initialState = {
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-    const urlBE = 'http://localhost:3001';
-
+    // const urlBE = 'http://localhost:3001';
+    const urlBE = process.env.REACT_APP_BACKEND_URL;
     const [state, dispatch] = useReducer(reducer, initialState);
 
     // aggiungo a localstorage
@@ -78,13 +78,7 @@ const AppProvider = ({ children }) => {
                 currUser
             );
             const { user, token } = data;
-            Swal.fire({
-                icon: 'success',
-                title: 'Ok',
-                text: 'Login successful!',
-                showConfirmButton: false,
-                timer: 1000,
-            });
+
             dispatch({
                 type: LOGIN_USER_SUCCESS,
                 payload: {

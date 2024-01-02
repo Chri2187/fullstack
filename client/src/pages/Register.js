@@ -17,10 +17,6 @@ const Register = () => {
 
     const { registerUser, loginUser, token } = useAppContext();
 
-    const toggleRegistered = () => {
-        setValues({ ...values, isRegistered: !values.isRegistered });
-    };
-
     const handleChange = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value });
     };

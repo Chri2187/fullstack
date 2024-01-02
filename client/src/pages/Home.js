@@ -3,6 +3,7 @@ import Cards from '../components/Cards';
 import data from '../progetti';
 
 const Home = () => {
+    console.log(`Backend: ${process.env.REACT_APP_BACKEND_URL}`);
     return (
         <>
             <div className='text-center my-5'>

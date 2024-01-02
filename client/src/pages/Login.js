@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -22,7 +21,6 @@ const Login = () => {
         }
     }, [token, navigate]);
 
-    const urlBE = 'http://localhost:3001/api/auth';
     const [values, setValues] = useState(initialState);
     const handleChange = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value });
@@ -48,6 +46,7 @@ const Login = () => {
             });
         }
     };
+
     return (
         <>
             <div id='formContainer' className='container  '>
