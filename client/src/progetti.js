@@ -11,8 +11,8 @@ const progetti = [
     },
     {
         id: 2,
-        titolo: 'Convertitore Euro - Dollaro',
-        testo: 'Permette di convertire una valore da Euro a Dollaro',
+        titolo: 'Convertitore Valuta',
+        testo: 'Permette di convertire una valore da una qualsiasi valuta',
         img: convert_img,
         link: '/converter',
     },

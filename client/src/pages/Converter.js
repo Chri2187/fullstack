@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ConvertRow from '../components/ConvertRow';
 import axios from 'axios';
+import progetti from '../progetti';
 
 const Converter = () => {
     // const exchangeURL = 'https://api.apilayer.com/currency_data/list';
@@ -26,7 +27,7 @@ const Converter = () => {
         axios
             .get(exchangeURL, {
                 headers: {
-                    apikey: 'fca_live_sOtcQp9nvyBoUxIq7du76twbgRqbOYd0ezqYqaF3',
+                    apikey: process.env.REACT_APP_API_FREECURRENCY_KEY,
                 },
             })
             .then((res) => {
@@ -50,7 +51,7 @@ const Converter = () => {
                 `${exchangeURL}?base_currency=${fromCurrency}&currencies=${toCurrency}`,
                 {
                     headers: {
-                        apikey: 'fca_live_sOtcQp9nvyBoUxIq7du76twbgRqbOYd0ezqYqaF3',
+                        apikey: process.env.REACT_APP_API_FREECURRENCY_KEY,
                     },
                 }
             )
@@ -73,7 +74,7 @@ const Converter = () => {
     return (
         <main className='container mt-3 '>
             <div className='text-center my-5'>
-                <h1>Converitore Euro - Dollaro</h1>
+                <h1>{progetti[1].titolo}</h1>
             </div>
             <div className='d-flex justify-content-center text-center'>
                 <div className='shadow-lg p-3 mb-5 bg-body rounded'>

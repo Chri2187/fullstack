@@ -39,7 +39,7 @@ const Navbar = () => {
                         </li>
                         <li className='nav-item'>
                             <Link className='nav-link' to='/converter'>
-                                EUR -&gt; USD
+                                Convert Value
                                 <BsCurrencyExchange color='#4287f5' />
                             </Link>
                         </li>
