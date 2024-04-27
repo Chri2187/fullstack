@@ -27,7 +27,7 @@ const Meteo = () => {
                         <input
                             type='text'
                             className='form-control '
-                            // placeholder='Insert city'
+                            placeholder='Insert city'
                             onChange={(e) => {
                                 setCity(e.target.value);
                             }}

@@ -3,7 +3,8 @@ import ConvertRow from '../components/ConvertRow';
 import axios from 'axios';
 
 const Converter = () => {
-    const exchangeURL = 'https://api.apilayer.com/currency_data/list';
+    // const exchangeURL = 'https://api.apilayer.com/currency_data/list';
+    const exchangeURL = 'https://api.freecurrencyapi.com/v1/latest';
 
     const [currencyOptions, setCurrencyOptions] = useState([]);
     const [fromCurrency, setFromCurrency] = useState();
@@ -20,37 +21,43 @@ const Converter = () => {
         toAmount = amount;
         fromAmount = toAmount / exchangeRate;
     }
-    var myHeaders = new Headers();
-    myHeaders.append('apikey', 'rmEFNRdDwRCT388vpCMGlYiWeXkvUdgp');
 
-    var requestOptions = {
-        method: 'GET',
-        redirect: 'follow',
-        headers: myHeaders,
-    };
     useEffect(() => {
-        fetch(exchangeURL, requestOptions)
-            .then((response) => response.text())
-            .then((result) => {
-                console.log(result);
-                console.log(...Object.keys(result));
-                const firstCurrency = Object.keys(result)[0];
+        axios
+            .get(exchangeURL, {
+                headers: {
+                    apikey: 'fca_live_sOtcQp9nvyBoUxIq7du76twbgRqbOYd0ezqYqaF3',
+                },
             })
-            // .then((data) => {
-            //     const firstCurrency = Object.keys(data.rates)[0];
-            //     setCurrencyOptions([data.base, ...Object.keys(data.rates)]);
-            //     setFromCurrency(data.base);
-            //     setToCurrency(firstCurrency);
-            //     setExchangeRate(data.rates[firstCurrency]);
-            // })
+            .then((res) => {
+                let values = res.data;
+                const firstCurrency = Object.keys(values.data)[0];
+                console.log(firstCurrency);
+                setCurrencyOptions([
+                    res.data.base,
+                    ...Object.keys(values.data),
+                ]);
+                setFromCurrency('USD');
+                setToCurrency(firstCurrency);
+                setExchangeRate(values[firstCurrency]);
+            })
             .catch((error) => console.log('error', error));
     }, []);
 
     useEffect(() => {
         if (fromCurrency != null && toCurrency != null) {
-            fetch(`${exchangeURL}&base${fromCurrency}&symbols${toCurrency}`)
+            fetch(
+                `${exchangeURL}?base_currency=${fromCurrency}&currencies=${toCurrency}`,
+                {
+                    headers: {
+                        apikey: 'fca_live_sOtcQp9nvyBoUxIq7du76twbgRqbOYd0ezqYqaF3',
+                    },
+                }
+            )
                 .then((res) => res.json())
-                .then((data) => setExchangeRate(data.rates[toCurrency]));
+                .then((data) => {
+                    setExchangeRate(data.data[toCurrency]);
+                });
         }
     }, [fromCurrency, toCurrency]);
 
