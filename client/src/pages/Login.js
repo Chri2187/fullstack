@@ -14,10 +14,11 @@ const Login = () => {
     const { loginUser, token } = useAppContext();
 
     useEffect(() => {
+        console.log(token);
         if (token) {
             setTimeout(() => {
                 navigate('/home');
-            }, 1000);
+            }, 500);
         }
     }, [token, navigate]);
 
@@ -31,14 +32,11 @@ const Login = () => {
         try {
             const { email, password } = values;
             const currUser = { email, password };
-
             loginUser(currUser);
-
             setTimeout(() => {
                 window.location.reload(false);
             }, 1000);
         } catch (err) {
-            console.log('dentro errore login');
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',

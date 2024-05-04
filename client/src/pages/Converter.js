@@ -4,8 +4,7 @@ import axios from 'axios';
 import progetti from '../progetti';
 
 const Converter = () => {
-    // const exchangeURL = 'https://api.apilayer.com/currency_data/list';
-    const exchangeURL = 'https://api.freecurrencyapi.com/v1/latest';
+    const exchangeURL = process.env.REACT_APP_API_FREECURRENCY_URL;
 
     const [currencyOptions, setCurrencyOptions] = useState([]);
     const [fromCurrency, setFromCurrency] = useState();
@@ -33,7 +32,6 @@ const Converter = () => {
             .then((res) => {
                 let values = res.data;
                 const firstCurrency = Object.keys(values.data)[0];
-                console.log(firstCurrency);
                 setCurrencyOptions([
                     res.data.base,
                     ...Object.keys(values.data),

@@ -34,18 +34,26 @@ const Navbar = () => {
                         </li>
                         <li className='nav-item'>
                             <Link className='nav-link' to='/meteo'>
-                                Meteo <TiWeatherPartlySunny color='#d2f1f2' />
+                                Meteo{' '}
+                                <TiWeatherPartlySunny
+                                    color='#d2f1f2'
+                                    className='mx-1'
+                                />
                             </Link>
                         </li>
                         <li className='nav-item'>
                             <Link className='nav-link' to='/converter'>
                                 Convert Value
-                                <BsCurrencyExchange color='#4287f5' />
+                                <BsCurrencyExchange
+                                    color='#4287f5'
+                                    className='mx-2'
+                                />
                             </Link>
                         </li>
                         <li className='nav-item'>
                             <Link className='nav-link' to='/tasks'>
-                                Task List <BsListTask color='#f5b618' />
+                                Task List{' '}
+                                <BsListTask color='#f5b618' className='mx-1' />
                             </Link>
                         </li>
                     </ul>

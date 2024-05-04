@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import Tasks from './pages/Tasks';
 import ProtectedRoutes from './components/ProtectedRoutes';
 import Login from './pages/Login';
+import Footer from './components/Footer';
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                 </Route>
                 <Route path='*' element={<ErrorPage />} />
             </Routes>
+            <Footer />
         </Router>
     );
 }
