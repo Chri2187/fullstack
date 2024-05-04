@@ -6,6 +6,7 @@ const Tasks = () => {
     const [taskName, setTaskName] = useState('');
     const [taskDate, setTaskDate] = useState('');
     const [taskList, setTaskList] = useState([]);
+
     useEffect(() => {
         if (localStorage.getItem('LStask')) {
             const LSListTask = JSON.parse(localStorage.getItem('LStask'));
@@ -16,7 +17,7 @@ const Tasks = () => {
     const handleTask = (e) => {
         e.preventDefault();
         if (!taskName) {
-            Swal.fire('Inserire Task e data', '', 'warning');
+            Swal.fire('Inserire Task e Data', '', 'warning');
             return;
         }
         setTaskList([...taskList, { task: taskName, date: taskDate }]);
@@ -35,7 +36,6 @@ const Tasks = () => {
         console.log(index);
         console.log(taskList.pop(taskList[index]));
         setTaskList(taskList.filter((val) => val.index !== index));
-        // setTaskList([...taskList, { task: taskName, date: taskDate }]);
     };
 
     const removeAll = () => {
@@ -81,7 +81,7 @@ const Tasks = () => {
                         <div className='d-grid gap-2 '>
                             <button
                                 className='btn btn-outline-primary'
-                                type='reset'
+                                type='submit'
                             >
                                 Aggiungi
                             </button>
