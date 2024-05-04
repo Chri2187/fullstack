@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <nav className='navbar fixed-bottom navbar-dark bg-dark'>
+        <nav className='navbar fixed-bottom navbar-dark bg-dark '>
             <Link className='navbar-brand mx-auto' to='/'>
                 CFM | FullStack Project
             </Link>
@@ -37,7 +37,16 @@ const Footer = () => {
                 </div>
                 <div className='offcanvas-body'>
                     <ul className='navbar-nav justify-content-end flex-grow-1 pe-3'>
-                        <li className='nav-item'>
+                        <li className='nav-item ' data-bs-dismiss='offcanvas'>
+                            <Link
+                                className='nav-link active'
+                                aria-current='page'
+                                to='/home'
+                            >
+                                Home
+                            </Link>
+                        </li>
+                        <li className='nav-item' data-bs-dismiss='offcanvas'>
                             <Link className='nav-link' to='/meteo'>
                                 Meteo{' '}
                                 <TiWeatherPartlySunny
@@ -46,7 +55,7 @@ const Footer = () => {
                                 />
                             </Link>
                         </li>
-                        <li className='nav-item'>
+                        <li className='nav-item' data-bs-dismiss='offcanvas'>
                             <Link className='nav-link' to='/converter'>
                                 Convert Value
                                 <BsCurrencyExchange
@@ -55,7 +64,7 @@ const Footer = () => {
                                 />
                             </Link>
                         </li>
-                        <li className='nav-item'>
+                        <li className='nav-item' data-bs-dismiss='offcanvas'>
                             <Link className='nav-link' to='/tasks'>
                                 Task List{' '}
                                 <BsListTask color='#f5b618' className='mx-1' />

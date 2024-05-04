@@ -8,8 +8,8 @@ const Home = () => {
             <div className='text-center my-5'>
                 <h1>Progetti</h1>
             </div>
-            <div className='container mt-5'>
-                <div className='row row-cols-1 row-cols-md-3 g-4'>
+            <div className='container mb-5'>
+                <div className='row row-cols-1 row-cols-md-4 g-3'>
                     {data.map((el) => (
                         <Cards key={el.id} {...el} />
                     ))}
